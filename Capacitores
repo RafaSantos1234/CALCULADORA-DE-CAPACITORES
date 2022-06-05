@@ -1,0 +1,53 @@
+from cProfile import label
+from msilib.schema import File
+from tkinter import*
+from tkinter import ttk
+
+from setuptools import Command
+root = Tk()
+root.title("Calculadora de capacitores cerámicos")
+root.geometry("400x250")
+root.resizable(0,0)
+titulo = Label (root, text="Calculadora de capacitores", font=("Times New Roman", 15))
+titulo.place(x=100)
+seleccion = ttk.Combobox(root, width=10, state="readonly")
+seleccion.place(x=300, y=35)
+seleccion["values"]= ("uF", "pF", "nF")
+seleccion.current(0)
+#Configuración de inicio la interfaz
+lbl_de_seleccion= Label(root, text="Selecciona la unidad que desea").place(x=5, y=30)
+lbl_de_seleccion2= Label(root, text="se le devuelva su cógido de capacitor").place(x=5, y=45)
+lbl_flecha= Label (root, text="➜").place(x=250, y= 35)
+lbl_entrada= Label (root,text="Entrada",font=("Century Gothic", 10)).place(x=50, y=70)
+lbl_salida= Label(root, text="Salida", font=("Century Gothic", 10)).place(x=300, y=70)
+lbl_valor= Label (root, text="Valor").place(x=30, y=100)
+lbl_tolerancia= Label (root, text="Tolerancia").place(x=15, y=130)
+lbl_tension= Label (root, text="Tensión").place(x=15, y=160)
+lbl_tensio2= Label (root, text="máxima").place(x=15, y=175)
+#Boton de conversión y borrar
+convertir= Command
+borrar_todo= Command
+conversion= Button(root, text="Convertir",bg="light gray", width=10, command=convertir).place(x=225, y=210)
+boton_borrar= Button(root, text="Borrar", bg="light gray",width=10, command=borrar_todo).place(x=310, y=210)
+#Label para entrada y salida de valores
+valor_entrada= Entry(root, width=15, bg="light gray").place(x=85, y=100)
+tolerancia_entrada= Entry (root, width=15, bg="light gray").place(x=85,y=130)
+tolerancia_entrada= Entry(root, width=15, bg="light gray").place (x=85, y=160)
+valor_salida= Label (root, text="", width=10, bg="light gray").place(x=270, y=100)
+tolerancia_salida= Label (root, text="", width=10, bg="light gray").place(x=270, y=130)
+tension_salida= Label (root, text="", width=10, bg="light gray").place(x=270, y=160)
+#Label para indictar entradas y salidas 
+def convertir ():
+    opc=seleccion.get()
+    if opc == "uF":
+        hacer_uF()
+    if opc =="nF":
+        hacer_nF()
+    if opc == "pF":
+        hacer_pF()
+def hacer_nF():
+    try:
+        numeros_de_valor= valor_entrada.get()
+        numeros_de_valor=int(numeros_de_valor)
+        valor_real= numeros_de_valor
+root.mainloop()
